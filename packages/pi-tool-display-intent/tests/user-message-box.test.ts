@@ -1136,8 +1136,8 @@ test("user message cache hit keeps exactly one zone marker", () => {
     const first = prototype.render(20);
     const second = prototype.render(20);
     assert.deepEqual(first, second);
-    assert.equal(second[0].match(/\x1b\]133;A\x07/g)?.length, 1);
-    assert.equal(second[1].match(/\x1b\]133;A\x07/g) ?? 0, 0);
+    assert.equal(second[0].split(OSC133_ZONE_START).length - 1, 1);
+    assert.equal(second[1].split(OSC133_ZONE_START).length - 1, 0);
   } finally {
     unregisterUserMessageRenderPrototypePatch(prototype);
   }
